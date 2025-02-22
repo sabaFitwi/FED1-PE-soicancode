@@ -1,0 +1,114 @@
+input,
+textarea,
+select {
+  border: 1px solid var(--gray-light-color);
+  margin: 5px 10px 0px 0;
+  padding: 15px;
+  max-width: 600px;
+}
+textarea {
+  min-height: 100px;
+}
+
+label {
+  margin-top: 16px;
+}
+main {
+  background: #f9f9f9;
+}
+.contact h1 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.contact {
+  margin: auto;
+}
+.contact-banner {
+  background: url(/images/contact1.PNG) center, no-repeat;
+  background-size: cover;
+  height: 350px;
+}
+.banner-for-contact {
+  height: 350px;
+}
+.contact-page_wrapper {
+  max-width: 400px;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 70px auto;
+}
+
+section.contact-page_detail {
+  /* display: block; */
+  padding: 60px 30px;
+}
+.contact-icon {
+  padding-right: 10px;
+}
+.contact-page_form > * {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 30px 120px 120px 30px;
+  border: 1px solid var(--gray-light-color);
+  background-color: var(--neutral-color);
+  border-radius: 10px;
+}
+.contact-form-error {
+  display: none;
+  color: red;
+  font-size: 14px;
+}
+.success {
+  color: green;
+  padding: 5px;
+}
+.cartSubmit {
+  align-items: center;
+}
+.invalid {
+  border: 1px solid red;
+}
+.contact-h2 {
+  text-align: center;
+  font-size: 25px;
+}
+button.sentBtn {
+  background: var(--header-button-color);
+  border: 0px solid var(--header-button-color);
+  border-radius: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--neutral-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  width: 240px;
+  position: relative;
+  height: 60px;
+  margin-top: 30px;
+}
+
+button.sentBtn:not(.loading):hover {
+  box-shadow: var(--box-shadow-small);
+}
+button.sentBtn:not(.loading):hover i {
+  transform: translate(5px);
+}
+button.sentBtn i {
+  font-size: 20px;
+  position: absolute;
+  left: 0px;
+  pointer-events: none;
+  z-index: 10;
+  background: inherit;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}

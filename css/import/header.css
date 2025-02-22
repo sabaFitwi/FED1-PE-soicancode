@@ -1,0 +1,138 @@
+.logo img {
+  height: 70px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: var(--navigation-color);
+  border-bottom: solid 8px var(--header-button-color);
+}
+.navbar {
+  text-align: center;
+  align-items: center;
+  transition: all 0.5s;
+  background-color: var(
+    --navigation-color
+  ); /* Add background color to the navbar */
+}
+.nav-menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  transition: 0.5s;
+  margin: 0;
+  background-color: var(
+    --navigation-color
+  ); /* Add background color to the nav menu */
+  z-index: 99; /* Ensure it is above other elements */
+  visibility: hidden; /* Hide the menu when not active */
+}
+.nav-menu.active {
+  right: 0;
+  visibility: visible; /* Show the menu when active */
+}
+.nav-menu li {
+  list-style: none;
+  padding: 15px 0;
+}
+nav ul li a {
+  position: relative;
+  padding: 10px 0;
+  color: var(--neutral-color);
+}
+.nav-link.active {
+  background: var(--header-button-color);
+  padding: 5px 10px;
+  color: var(--neutral-color);
+}
+.nav-link.active:hover {
+  opacity: 0.9;
+}
+nav ul li a:after {
+  content: "";
+  position: absolute;
+  background: var(--header-button-color);
+  width: 100%;
+  height: 4px;
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 250ms ease-in;
+}
+nav ul li a:hover:after {
+  transform: scaleX(1);
+  transform-origin: center;
+}
+
+.bar,
+.fa-times {
+  width: 1.5rem;
+  height: 3px;
+  display: block;
+  padding: 0;
+  margin: 6px;
+  transition: 0.5s;
+  background-color: var(--header-button-color);
+}
+
+.hamburger {
+  display: block;
+}
+.active {
+  right: 0;
+  z-index: 100;
+  transition: 0.2s ease;
+}
+.bar:nth-child(1) {
+  width: 100%;
+}
+
+.bar:nth-child(2) {
+  width: 200%;
+}
+
+.bar:nth-child(3) {
+  width: 300%;
+}
+.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(-315deg);
+  width: 300%;
+}
+.active .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+  width: 300%;
+}
+
+.text-typing {
+  position: relative;
+  margin-left: 10px;
+}
+.text-typing::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  width: 1px;
+  height: 90%;
+  border-right: 2px solid;
+  animation: blink 0.5s infinite ease;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

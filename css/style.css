@@ -1,0 +1,64 @@
+@import url(import/variable.css);
+@import url(import/link.css);
+@import url(import/animations.css);
+@import url(import/header.css);
+@import url(import/banner.css);
+@import url(import/main.css);
+@import url(import/footer.css);
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  font-family: var(--text-paragraph);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+h1 {
+  text-align: center;
+  font-family: var(--text-heading);
+  color: var(--header-button-color);
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 18px;
+}
+.font-transform-h1 {
+  text-transform: capitalize;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+h2,
+h3 {
+  font-family: var(--text-heading);
+  text-transform: capitalize;
+  font-weight: normal;
+  color: var(--header-button-color);
+}
+p {
+  color: var(--gray-dark-color);
+  font-weight: 400px;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+}
+header,
+footer {
+  margin: 0;
+  padding: 0;
+}
+img {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  object-fit: contain;
+}
+h3 {
+  font-size: 14px;
+}
+h2 {
+  font-size: 16px;
+}

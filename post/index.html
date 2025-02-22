@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="the future of tech and R&D." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400&isplay=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/main/posts.css" />
+    <link rel="stylesheet" href="css/media.css" />
+    <script
+      src="https://kit.fontawesome.com/b3766b9c07.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>blog-tech | login</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a class="logo" href="index.html"
+          ><img src="images/logo1.png" alt="Logo"
+        /></a>
+
+        <div class="navbar">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="../blog.html" class="nav-link active">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="../about.html" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="../contact.html" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="../account/register.html" class="nav-link"
+                >register</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="../account/login.html" class="nav-link"
+                >login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link">create post</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+    <!-- end of navbar -->
+    <form id="createPostForm">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+      </div>
+
+      <div>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body"></textarea>
+      </div>
+
+      <div>
+        <label for="tags">Tags:</label>
+        <input
+          type="text"
+          id="tags"
+          name="tags"
+          placeholder="Enter tags separated by commas"
+        />
+      </div>
+
+      <div>
+        <label for="mediaUrl">Media URL:</label>
+        <input
+          type="url"
+          id="mediaUrl"
+          name="mediaUrl"
+          placeholder="https://url.com/image.jpg"
+        />
+      </div>
+
+      <div>
+        <label for="mediaAlt">Media Alt Text:</label>
+        <input
+          type="text"
+          id="mediaAlt"
+          name="mediaAlt"
+          placeholder="Description of the image"
+        />
+      </div>
+
+      <button type="submit">Create Post</button>
+    </form>
+
+    <div class="my-5">
+      <footer class="parallax">
+        <div class="footer-container">
+          <div class="social-media-links scroll-down fade-in-bottom">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+          <p class="footer-span">Copyright 2025</p>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/js/post/index.js"></script>
+  </body>
+</html>

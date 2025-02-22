@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="the future of tech and R&D. register here"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400&isplay=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/main/register.css" />
+    <link rel="stylesheet" href="css/media.css" />
+    <script
+      src="https://kit.fontawesome.com/b3766b9c07.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Tech-blog | Register</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="logo" href="../index.html"
+          ><img src="images/logo1.png" alt="Logo"
+        /></a>
+
+        <div class="navbar">
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="../blog.html" class="nav-link active">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="../about.html" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="../contact.html" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="login.html" class="nav-link">login</a>
+            </li>
+            <li class="nav-item">
+              <a href="register.html" class="nav-link">register</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- register form -->
+    <main class="container mb-5">
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card shadow">
+            <div class="card-title text-center bg-info border-bottom">
+              <h2 class="p-3">Register</h2>
+            </div>
+
+            <div class="card-body">
+              <form id="registerForm">
+                <div class="error error-container"></div>
+                <div class="form-floating">
+                  <input
+                    id="username"
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="username"
+                    pattern="^[\w]+$"
+                    title="only upper and lowercase, numbers, and underscore  example(saba_sam123)"
+                    required
+                  />
+                  <label for="username">User Name</label>
+                </div>
+
+                <div class="form-floating">
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    class="form-control my-3"
+                    placeholder=" Email "
+                    required
+                    pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                    maxlength="20"
+                    title="only@stud.noroff.no domain allowed. Example (example@stud.noroff.no)"
+                  />
+                  <label for="email">Email</label>
+                </div>
+
+                <div class="form-floating">
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    class="form-control my-3"
+                    placeholder="New password"
+                    required
+                    minlength="8"
+                  />
+                  <label for="password">Password</label>
+                </div>
+
+                <div class="form-floating">
+                  <input
+                    id="avatarInput"
+                    type="url"
+                    name="avatar"
+                    class="form-control my-2"
+                    placeholder="Avatar URL"
+                  />
+                  <label for="avatar">Avatar Image</label>
+                </div>
+
+                <div class="d-grid p-3 mt-5">
+                  <button type="submit" class="btn text-light fs-4">
+                    Register
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="my-5">
+      <footer class="parallax">
+        <div class="footer-container">
+          <div class="social-media-links scroll-down fade-in-bottom">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+          <p class="footer-span">Copyright 2025</p>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/js/account/register.js"></script>
+  </body>
+</html>

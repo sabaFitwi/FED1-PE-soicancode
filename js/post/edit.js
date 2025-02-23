@@ -2,16 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const editPostForm = document.querySelector("#editPostForm");
   const localStorageKey = "data";
 
-  // Fetch the post data to pre-fill the form
   const postId = new URLSearchParams(window.location.search).get(
     "id"
-  ); // Get post ID from URL
+  );
   if (!postId) {
     alert("Post ID not found in URL.");
     return;
   }
 
-  // Fetch the post data from localStorage
   const fetchPost = () => {
     const savedPosts = localStorage.getItem(localStorageKey);
     if (savedPosts) {
@@ -19,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const post = posts.find((post) => post.id === postId);
 
       if (post) {
-        prefillForm(post); // Pre-fill the form with the post data
+        prefillForm(post);
       } else {
         alert("Post not found.");
       }
@@ -35,13 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
       post.tags?.join(", ") || "";
     document.getElementById("mediaUrl").value = post.media?.url || "";
     document.getElementById("mediaAlt").value = post.media?.alt || "";
+    document.getElementById("authorName").value =
+      post.author?.name || "";
+    document.getElementById("authorBio").value =
+      post.author?.bio || "";
+    document.getElementById("authorAvatarUrl").value =
+      post.author?.avatar?.url || "";
+    document.getElementById("authorAvatarAlt").value =
+      post.author?.avatar?.alt || "";
   };
 
-  // Handle form submission
   editPostForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    // Disable the submit button to prevent multiple submissions
     const submitButton = editPostForm.querySelector(
       'button[type="submit"]'
     );
@@ -61,9 +65,15 @@ document.addEventListener("DOMContentLoaded", () => {
         url: formData.get("mediaUrl"),
         alt: formData.get("mediaAlt"),
       },
+      author: {
+        name: formData.get("authorName"),
+        bio: formData.get("authorBio"),
+        avatar: {
+          url: formData.get("authorAvatarUrl"),
+          alt: formData.get("authorAvatarAlt"),
+        },
+      },
     };
-
-    console.log("Updated Post Data:", postData);
 
     if (!postData.title) {
       alert("Title is required.");
@@ -90,11 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("No posts found in localStorage.");
     }
 
-    // Re-enable the submit button
     submitButton.disabled = false;
     submitButton.textContent = "Update Post";
   });
 
-  // Fetch the post data when the page loads
   fetchPost();
 });

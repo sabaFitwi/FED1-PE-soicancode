@@ -101,7 +101,7 @@ createPostForm.addEventListener("submit", async (event) => {
     postContainer.appendChild(postElement);
 
     alert("Post created successfully!");
-    window.location.href = "/blog.html"; // Redirect to the blog page
+    window.location.href = "/blog.html";
   } catch (error) {
     console.error("Error:", error);
     alert(error.message);

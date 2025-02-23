@@ -59,8 +59,7 @@
 .right-side {
   padding-bottom: 10px;
 }
-.content,
-header {
+.content {
   width: 60%;
   margin: 0 auto;
 }

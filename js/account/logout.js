@@ -7,6 +7,11 @@ function remove(key) {
 export const logout = function () {
   remove("token");
   remove("profile");
+  remove("name");
+  remove("email");
+  remove("bio");
+  remove("avatarUrl");
+  remove("avatarAlt");
   window.location.replace("/index.html");
 };
 

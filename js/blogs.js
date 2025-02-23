@@ -3,26 +3,28 @@ import { displayError } from "./component/displayError.js";
 const blogCardWrapper = document.querySelector(".blog-wrapper");
 const loaderButton = document.querySelector(".button-loadmore");
 
-const url = `https://v2.api.noroff.dev/blog/posts/${name}`;
+const localStorageKey = "data";
 
-async function getPost(baseUrl) {
-  blogCardWrapper.innerHTML = `<div class="loader"></div>`;
+function loadPostsFromLocalStorage() {
+  const savedPosts = localStorage.getItem(localStorageKey);
 
-  try {
-    const response = await fetch(baseUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+  if (savedPosts) {
+    try {
+      let posts = JSON.parse(savedPosts);
+      if (!Array.isArray(posts)) {
+        posts = [posts];
+      }
+      generateHtml(posts);
+    } catch (error) {
+      console.error("Error parsing localStorage data:", error);
+      blogCardWrapper.innerHTML = displayError(
+        "Invalid data format."
+      );
     }
-    const data = await response.json();
-    generateHtml(data.data); // Pass the data array to generateHtml
-  } catch (error) {
-    console.error("Error fetching posts:", error);
+  } else {
     blogCardWrapper.innerHTML = displayError(
-      "An error occurred. Please try again"
+      "No posts found in localStorage."
     );
-
-    blogCardWrapper.classList.add("error");
-    loaderButton.style.display = "none";
   }
 }
 
@@ -84,7 +86,8 @@ function generateHtml(results) {
   }
 }
 
-getPost(url);
+// Load posts from localStorage
+loadPostsFromLocalStorage();
 
 // Sort by date
 const sortButtons = document.querySelectorAll(".sort-button");

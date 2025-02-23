@@ -1,19 +1,29 @@
 import { displayError } from "./component/displayError.js";
 
-const url = "https://v2.api.noroff.dev/blog/posts";
-const singleBlogPages = document.querySelector(".single-blog-pages");
+const singleBlogPage = document.querySelector(".single-blog-page");
 const title = document.querySelector("title");
+const localStorageKey = "data";
 
-async function getPost() {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    getPostDetail(data.data);
-  } catch (error) {
-    singleBlogPages.innerHTML = displayError(
-      "An error occurred. Please try again"
+function getPost() {
+  const savedPosts = localStorage.getItem(localStorageKey);
+
+  if (savedPosts) {
+    try {
+      let posts = JSON.parse(savedPosts);
+      if (!Array.isArray(posts)) {
+        posts = [posts];
+      }
+      getPostDetail(posts);
+    } catch (error) {
+      console.error("Error parsing localStorage data:", error);
+      singleBlogPage.innerHTML = displayError("Invalid data format.");
+      singleBlogPage.classList.add("error");
+    }
+  } else {
+    singleBlogPage.innerHTML = displayError(
+      "No posts found in localStorage."
     );
-    singleBlogPages.classList.add("error");
+    singleBlogPage.classList.add("error");
   }
 }
 
@@ -24,13 +34,13 @@ function getPostDetail(posts) {
   const post = posts.find(({ id }) => id == postId);
 
   if (!post) {
-    singleBlogPages.innerHTML = displayError("Post not found.");
+    singleBlogPage.innerHTML = displayError("Post not found.");
     return;
   }
 
-  title.innerHTML = `Blog | ${post.title}`;
+  title.innerHTML = `Tech-Blog | ${post.title}`;
 
-  singleBlogPages.innerHTML = `
+  singleBlogPage.innerHTML = `
     <section class="banner">
       <div style="background-image: url(${
         post.media.url

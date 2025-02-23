@@ -1,12 +1,11 @@
 const createPostForm = document.querySelector("#createPostForm");
 const userName = localStorage.getItem("name");
+const token = localStorage.getItem("token");
 
 const url = `https://v2.api.noroff.dev/blog/posts/${userName}`;
 
 createPostForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-
-  const token = `Bearer ${localStorage.getItem("token")}`;
 
   const submitButton = createPostForm.querySelector(
     'button[type="submit"]'
@@ -53,7 +52,7 @@ createPostForm.addEventListener("submit", async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(postData),
     });
@@ -71,7 +70,24 @@ createPostForm.addEventListener("submit", async (event) => {
       result.data;
     console.log("Post ID:", id);
 
+    // Retrieve existing posts from localStorage
+    let savedPosts = localStorage.getItem("data");
+    savedPosts = savedPosts ? JSON.parse(savedPosts) : [];
+
+    if (!Array.isArray(savedPosts)) {
+      savedPosts = [savedPosts];
+    }
+
+    // Add new post to the array
+    savedPosts.push(result.data);
+
+    // Save updated posts array back to localStorage
+    localStorage.setItem("data", JSON.stringify(savedPosts));
+
     const postContainer = document.querySelector("#postContainer");
+    if (!postContainer) {
+      throw new Error("Post container element not found.");
+    }
     const postElement = document.createElement("div");
     postElement.classList.add("post");
     postElement.setAttribute("data-post-id", id);
@@ -92,7 +108,6 @@ createPostForm.addEventListener("submit", async (event) => {
     postContainer.appendChild(postElement);
 
     alert("Post created successfully!");
-    location.href = "/index.html";
   } catch (error) {
     console.error("Error:", error);
     alert(error.message);

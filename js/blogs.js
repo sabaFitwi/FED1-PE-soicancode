@@ -3,8 +3,7 @@ import { displayError } from "./component/displayError.js";
 const blogCardWrapper = document.querySelector(".blog-wrapper");
 const loaderButton = document.querySelector(".button-loadmore");
 
-const url =
-  "https://v2.api.noroff.dev/blog/posts/9bf37ee1-1a4f-4540-bca8-95e1425579f1";
+const url = `https://v2.api.noroff.dev/blog/posts/${name}`;
 
 async function getPost(baseUrl) {
   blogCardWrapper.innerHTML = `<div class="loader"></div>`;

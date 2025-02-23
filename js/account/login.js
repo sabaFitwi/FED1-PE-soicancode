@@ -28,6 +28,8 @@ form.addEventListener("submit", (event) => {
         console.log("Login successful:", profile);
         save("token", profile.data.accessToken);
         save("profile", JSON.stringify(profile.data));
+        save("name", profile.data.name);
+
         alert("Login successful!");
         return profile;
       } else {

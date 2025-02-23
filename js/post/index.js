@@ -1,6 +1,7 @@
 const createPostForm = document.querySelector("#createPostForm");
-const url = "https://v2.api.noroff.dev/blog/posts";
-const apiKey = "9bf37ee1-1a4f-4540-bca8-95e1425579f1";
+const userName = localStorage.getItem("name");
+
+const url = `https://v2.api.noroff.dev/blog/posts/${userName}`;
 
 createPostForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -25,6 +26,17 @@ createPostForm.addEventListener("submit", async (event) => {
       url: formData.get("mediaUrl"),
       alt: formData.get("mediaAlt"),
     },
+    created: new Date().toISOString(),
+    updated: new Date().toISOString(),
+    author: {
+      name: localStorage.getItem("name"),
+      email: localStorage.getItem("email"),
+      bio: localStorage.getItem("bio"),
+      avatar: {
+        url: localStorage.getItem("avatarUrl"),
+        alt: localStorage.getItem("avatarAlt"),
+      },
+    },
   };
 
   console.log("Post Data:", postData);
@@ -41,7 +53,6 @@ createPostForm.addEventListener("submit", async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Noroff-API-Key": apiKey,
         Authorization: token,
       },
       body: JSON.stringify(postData),
@@ -56,12 +67,10 @@ createPostForm.addEventListener("submit", async (event) => {
       );
     }
 
-    // Extract the post ID and other details from the response
     const { id, title, body, tags, media, created, updated, author } =
       result.data;
     console.log("Post ID:", id);
 
-    // Render the post details (example)
     const postContainer = document.querySelector("#postContainer");
     const postElement = document.createElement("div");
     postElement.classList.add("post");
@@ -78,6 +87,7 @@ createPostForm.addEventListener("submit", async (event) => {
       <p class="post-updated">Updated: ${new Date(
         updated
       ).toLocaleString()}</p>
+      <p class="post-id">Post ID: ${id}</p>
     `;
     postContainer.appendChild(postElement);
 

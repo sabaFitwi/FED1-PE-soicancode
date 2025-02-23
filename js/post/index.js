@@ -38,8 +38,6 @@ createPostForm.addEventListener("submit", async (event) => {
     },
   };
 
-  console.log("Post Data:", postData);
-
   if (!postData.title) {
     alert("Title is required.");
     submitButton.disabled = false;
@@ -58,7 +56,6 @@ createPostForm.addEventListener("submit", async (event) => {
     });
 
     const result = await response.json();
-    console.log("API Response:", result);
 
     if (!response.ok) {
       throw new Error(
@@ -68,9 +65,7 @@ createPostForm.addEventListener("submit", async (event) => {
 
     const { id, title, body, tags, media, created, updated, author } =
       result.data;
-    console.log("Post ID:", id);
 
-    // Retrieve existing posts from localStorage
     let savedPosts = localStorage.getItem("data");
     savedPosts = savedPosts ? JSON.parse(savedPosts) : [];
 
@@ -78,10 +73,8 @@ createPostForm.addEventListener("submit", async (event) => {
       savedPosts = [savedPosts];
     }
 
-    // Add new post to the array
     savedPosts.push(result.data);
 
-    // Save updated posts array back to localStorage
     localStorage.setItem("data", JSON.stringify(savedPosts));
 
     const postContainer = document.querySelector("#postContainer");
@@ -108,11 +101,11 @@ createPostForm.addEventListener("submit", async (event) => {
     postContainer.appendChild(postElement);
 
     alert("Post created successfully!");
+    window.location.href = "/blog.html"; // Redirect to the blog page
   } catch (error) {
     console.error("Error:", error);
     alert(error.message);
   } finally {
-    // Re-enable the submit button
     submitButton.disabled = false;
     submitButton.textContent = "Create Post";
   }

@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const editPostForm = document.querySelector("#editPostForm");
-  const url = "https://v2.api.noroff.dev/blog/posts"; // Replace with your actual API endpoint
-  const apiKey = "9bf37ee1-1a4f-4540-bca8-95e1425579f1"; // Your API key
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYXplYl9zYW0iLCJlbWFpbCI6ImF6aXNhbUBzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTc0MDIzNTU2MH0.DukCSjk2MEYxw3z4RSJHqYa20ZJ14iL7UeQ3fEa2nic"; // Manually added token
+  const localStorageKey = "data";
 
   // Fetch the post data to pre-fill the form
   const postId = new URLSearchParams(window.location.search).get(
@@ -14,32 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Fetch the post data
-  const fetchPost = async () => {
-    try {
-      const response = await fetch(`${url}/${postId}`, {
-        headers: {
-          "X-Noroff-API-Key": apiKey,
-          Authorization: token,
-        },
-      });
+  // Fetch the post data from localStorage
+  const fetchPost = () => {
+    const savedPosts = localStorage.getItem(localStorageKey);
+    if (savedPosts) {
+      const posts = JSON.parse(savedPosts);
+      const post = posts.find((post) => post.id === postId);
 
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(
-          result.message || "Failed to fetch post data."
-        );
+      if (post) {
+        prefillForm(post); // Pre-fill the form with the post data
+      } else {
+        alert("Post not found.");
       }
-
-      const post = result.data; // Assuming the API returns the post data in `data`
-      prefillForm(post); // Pre-fill the form with the post data
-    } catch (error) {
-      console.error("Error fetching post:", error);
-      alert(error.message);
+    } else {
+      alert("No posts found in localStorage.");
     }
   };
 
-  // Pre-fill the form with the post data
   const prefillForm = (post) => {
     document.getElementById("title").value = post.title || "";
     document.getElementById("body").value = post.body || "";
@@ -50,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Handle form submission
-  editPostForm.addEventListener("submit", async (event) => {
+  editPostForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     // Disable the submit button to prevent multiple submissions
@@ -62,12 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formData = new FormData(event.target);
     const postData = {
+      id: postId,
       title: formData.get("title"),
       body: formData.get("body"),
       tags: formData
         .get("tags")
         .split(",")
-        .map((tag) => tag.trim()), // Convert tags to an array
+        .map((tag) => tag.trim()),
       media: {
         url: formData.get("mediaUrl"),
         alt: formData.get("mediaAlt"),
@@ -76,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Updated Post Data:", postData);
 
-    // Validate required fields
     if (!postData.title) {
       alert("Title is required.");
       submitButton.disabled = false;
@@ -84,36 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    try {
-      const response = await fetch(`${url}/${postId}`, {
-        method: "PUT", // Use PUT or PATCH depending on your API
-        headers: {
-          "Content-Type": "application/json",
-          "X-Noroff-API-Key": apiKey,
-          Authorization: token,
-        },
-        body: JSON.stringify(postData),
-      });
+    const savedPosts = localStorage.getItem(localStorageKey);
+    if (savedPosts) {
+      let posts = JSON.parse(savedPosts);
+      const postIndex = posts.findIndex((post) => post.id === postId);
 
-      const result = await response.json();
-      console.log("API Response:", result);
+      if (postIndex !== -1) {
+        posts[postIndex] = postData;
 
-      if (!response.ok) {
-        throw new Error(
-          result.message || "Failed to update post. Please try again."
-        );
+        localStorage.setItem(localStorageKey, JSON.stringify(posts));
+        alert("Post updated successfully!");
+        location.href = "/blog.html";
+      } else {
+        alert("Post not found.");
       }
-
-      alert("Post updated successfully!");
-      location.href = "/posts.html"; // Redirect to the posts page (or any other page)
-    } catch (error) {
-      console.error("Error:", error);
-      alert(error.message);
-    } finally {
-      // Re-enable the submit button
-      submitButton.disabled = false;
-      submitButton.textContent = "Update Post";
+    } else {
+      alert("No posts found in localStorage.");
     }
+
+    // Re-enable the submit button
+    submitButton.disabled = false;
+    submitButton.textContent = "Update Post";
   });
 
   // Fetch the post data when the page loads

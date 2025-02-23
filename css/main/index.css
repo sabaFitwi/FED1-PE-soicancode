@@ -96,10 +96,9 @@
 
 .content {
   display: flex;
-  gap: 16px; /* Adjust the gap as needed */
+  gap: 16px;
 }
-
 .blogs_card {
-  flex: 0 0 calc(33.333% - 16px); /* Adjust the width to fit 3 items */
+  flex: 0 0 calc(33.333% - 16px);
   scroll-snap-align: start;
 }

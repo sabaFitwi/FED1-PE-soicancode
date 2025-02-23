@@ -14,7 +14,7 @@ function loadPostsFromLocalStorage() {
       if (!Array.isArray(posts)) {
         posts = [posts];
       }
-      generateHtml(posts);
+      renderPosts(posts);
     } catch (error) {
       console.error("Error parsing localStorage data:", error);
       blogCardWrapper.innerHTML = displayError(
@@ -28,62 +28,110 @@ function loadPostsFromLocalStorage() {
   }
 }
 
-function generateHtml(results) {
+function renderPosts(posts) {
   blogCardWrapper.innerHTML = "";
 
-  if (results) {
-    results.forEach(function (result) {
-      blogCardWrapper.innerHTML += `<div class="all blogs_card" data-category="${result.tags.join(
+  if (posts.length > 0) {
+    posts.forEach((post) => {
+      blogCardWrapper.innerHTML += `<div class="all blogs_card" data-category="${post.tags.join(
         ", "
       )}">
                                       <a href="single-post.html?id=${
-                                        result.id
+                                        post.id
                                       }">
                                         <div class="blogs_card-banner">
-                                          <p class="category-tag">${result.tags.join(
+                                          <p class="category-tag">${post.tags.join(
                                             ", "
                                           )}</p>
                                           <img
                                           class="banner-img"
-                                          src="${result.media.url}"
-                                          alt="${result.media.alt}"
+                                          src="${post.media.url}"
+                                          alt="${post.media.alt}"
                                           />
                                         </div>
                                         <div class="blogs_card-body">
                                           <h2 class="blog-title">${
-                                            result.title
+                                            post.title
                                           }</h2>
                                           <p class="blog-description">${
-                                            result.body
+                                            post.body
                                           }</p>
                                           <a href="single-post.html?id=${
-                                            result.id
+                                            post.id
                                           }" class="link-style-readMore">Read More >></a>
                                         <div class="blogs_card-profile">
                                           <img
                                             class="profile-img"
                                             src="${
-                                              result.author.avatar.url
+                                              post.author?.avatar
+                                                ?.url ||
+                                              "default-avatar.png"
                                             }"
                                             alt="${
-                                              result.author.avatar.alt
+                                              post.author?.avatar
+                                                ?.alt ||
+                                              "Default Avatar"
                                             }"
                                           />
                                         <div class="blogs_card-profile-info">
                                           <h3 class="profile-name">${
-                                            result.author.name
+                                            post.author?.name ||
+                                            "Unknown Author"
                                           }</h3>
                                           <p class="profile-followers">${
-                                            result.author.bio
+                                            post.author?.bio ||
+                                            "No bio available"
                                           }</p>
                                         </div>
+                                        </div>
+                                        <div class="post-actions">
+                                          <button class="update-post" data-id="${
+                                            post.id
+                                          }">
+                                            <i class="fas fa-edit"></i>
+                                          </button>
+                                          <button class="delete-post" data-id="${
+                                            post.id
+                                          }">
+                                            <i class="fas fa-trash-alt"></i>
+                                          </button>
                                         </div>
                                       </div></a>
                                     </div>`;
     });
+
+    // Add event listeners to update and delete buttons
+    const updateButtons = document.querySelectorAll(".update-post");
+    updateButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const postId = event.target.closest("button").dataset.id;
+        window.location.href = `./post/edit.html?id=${postId}`;
+      });
+    });
+
+    const deleteButtons = document.querySelectorAll(".delete-post");
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const postId = event.target.closest("button").dataset.id;
+        deletePost(postId);
+      });
+    });
   } else {
     blogCardWrapper.classList.remove("error");
   }
+}
+
+function deletePost(postId) {
+  let savedPosts = localStorage.getItem(localStorageKey);
+  savedPosts = savedPosts ? JSON.parse(savedPosts) : [];
+
+  const updatedPosts = savedPosts.filter(
+    (post) => post.id !== postId
+  );
+
+  localStorage.setItem(localStorageKey, JSON.stringify(updatedPosts));
+
+  renderPosts(updatedPosts);
 }
 
 // Load posts from localStorage

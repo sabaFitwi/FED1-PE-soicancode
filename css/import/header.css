@@ -79,7 +79,7 @@ nav ul li a:hover:after {
   padding: 0;
   margin: 6px;
   transition: 0.5s;
-  background-color: var(--header-button-color);
+  background-color: var(--neutral-color);
 }
 
 .hamburger {

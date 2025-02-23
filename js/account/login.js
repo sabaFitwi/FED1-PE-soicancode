@@ -30,8 +30,9 @@ form.addEventListener("submit", (event) => {
         save("profile", JSON.stringify(profile.data));
         save("name", profile.data.name);
 
-        alert("Login successful!");
-        return profile;
+        alert("Login successful!")
+          location.href = "/post/index.html"
+      
       } else {
         console.error("Login failed:", response.statusText);
         throw new Error(response.statusText);

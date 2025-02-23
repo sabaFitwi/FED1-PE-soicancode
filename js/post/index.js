@@ -1,14 +1,12 @@
 const createPostForm = document.querySelector("#createPostForm");
 const url = "https://v2.api.noroff.dev/blog/posts";
-const apiKey = "9bf37ee1-1a4f-4540-bca8-95e1425579f1"; // Your API key
+const apiKey = "9bf37ee1-1a4f-4540-bca8-95e1425579f1";
 
 createPostForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // Retrieve the token from local storage
   const token = `Bearer ${localStorage.getItem("token")}`;
 
-  // Disable the submit button to prevent multiple submissions
   const submitButton = createPostForm.querySelector(
     'button[type="submit"]'
   );
@@ -22,7 +20,7 @@ createPostForm.addEventListener("submit", async (event) => {
     tags: formData
       .get("tags")
       .split(",")
-      .map((tag) => tag.trim()), // Convert tags to an array
+      .map((tag) => tag.trim()),
     media: {
       url: formData.get("mediaUrl"),
       alt: formData.get("mediaAlt"),
@@ -31,7 +29,6 @@ createPostForm.addEventListener("submit", async (event) => {
 
   console.log("Post Data:", postData);
 
-  // Validate required fields
   if (!postData.title) {
     alert("Title is required.");
     submitButton.disabled = false;
@@ -85,7 +82,7 @@ createPostForm.addEventListener("submit", async (event) => {
     postContainer.appendChild(postElement);
 
     alert("Post created successfully!");
-    location.href = "/index.html"; // Redirect to the posts page (or any other page)
+    location.href = "/index.html";
   } catch (error) {
     console.error("Error:", error);
     alert(error.message);

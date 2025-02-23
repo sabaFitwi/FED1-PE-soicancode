@@ -19,12 +19,12 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400&isplay=swap"
+      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/main/blog.css" />
-    <link rel="stylesheet" href="css/media.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/main/posts.css" />
+    <link rel="stylesheet" href="../css/media.css" />
     <script
       src="https://kit.fontawesome.com/b3766b9c07.js"
       crossorigin="anonymous"
@@ -37,28 +37,42 @@
     <header>
       <nav>
         <a class="logo" href="index.html"
-          ><img src="images/logo1.png" alt="Logo"
+          ><img src="../images/logo1.PNG" alt="Logo"
         /></a>
 
         <div class="navbar">
           <ul class="nav-menu">
             <li class="nav-item">
-              <a href="index.html" class="nav-link">Home</a>
+              <a href="../index.html" class="nav-link active">Home</a>
             </li>
             <li class="nav-item">
-              <a href="blog.html" class="nav-link active">Blog</a>
+              <a href="../blog.html" class="nav-link">Blog</a>
             </li>
             <li class="nav-item">
-              <a href="about.html" class="nav-link">About</a>
+              <a href="../about.html" class="nav-link">About</a>
             </li>
             <li class="nav-item">
-              <a href="contact.html" class="nav-link">Contact</a>
+              <a href="../contact.html" class="nav-link">Contact</a>
             </li>
             <li class="nav-item">
-              <a href="register.html" class="nav-link">register</a>
+              <a href="../post/index.html" class="nav-link"
+                >Create post</a
+              >
             </li>
             <li class="nav-item">
-              <a href="login.html" class="nav-link">login</a>
+              <a href="../account/register.html" class="nav-link"
+                >Register</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="../account/login.html" class="nav-link"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <button id="logoutButton" class="btn btn-logout">
+                Logout
+              </button>
             </li>
           </ul>
         </div>
@@ -76,11 +90,9 @@
       <div class="row justify-content-center mt-5">
         <div class="col-lg-5 col-md-6 col-sm-6">
           <div class="card shadow">
-            <div class="card-title text-center bg-info border-bottom">
-              <h2 class="p-3">Login</h2>
-            </div>
             <div class="card-body">
               <form id="loginForm">
+                <h2 class="p-3">Login</h2>
                 <div class="error error-container"></div>
                 <div class="form-floating">
                   <input
@@ -90,8 +102,8 @@
                     class="form-control my-3"
                     placeholder=" Email "
                     required
-                    pattern="^[\w\-.]+@?stud.noroff.no$"
-                    title="only@stud.noroff.no domain allowed. Example (example@(stud.)noroff.no)"
+                    pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                    title="only@stud.noroff.no domain allowed. Example (example@stud.noroff.no)"
                   />
                   <label for="email">Email</label>
                 </div>
@@ -119,11 +131,6 @@
           </div>
         </div>
       </div>
-      <button
-        class="btn rounded-pill bg-dark scrollup-button float-end mt-5 position-fixed bottom-0 end-0 fs-5"
-      >
-        Top
-      </button>
     </main>
     <div class="my-5">
       <footer class="parallax">

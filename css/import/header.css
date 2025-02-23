@@ -31,8 +31,7 @@ nav {
   background-color: var(
     --navigation-color
   ); /* Add background color to the nav menu */
-  z-index: 99; /* Ensure it is above other elements */
-  visibility: hidden; /* Hide the menu when not active */
+  /* z-index: 99; /* Ensure it is above other elements */
 }
 .nav-menu.active {
   right: 0;

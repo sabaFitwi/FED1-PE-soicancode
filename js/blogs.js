@@ -96,6 +96,12 @@ function renderPosts(posts) {
                                             <i class="fas fa-trash-alt"></i>
                                           </button>
                                         </div>
+                                        <p class="post-created" style="display:none;">${
+                                          post.created
+                                        }</p>
+                                        <p class="post-updated" style="display:none;">${
+                                          post.updated
+                                        }</p>
                                       </div></a>
                                     </div>`;
     });
@@ -150,10 +156,10 @@ function sortPosts(sortType) {
   const posts = [...document.querySelectorAll(".blogs_card")];
   posts.sort((a, b) => {
     const dateA = new Date(
-      a.querySelector(".post-created").textContent
+      a.querySelector(".post-updated").textContent
     );
     const dateB = new Date(
-      b.querySelector(".post-created").textContent
+      b.querySelector(".post-updated").textContent
     );
     return sortType === "latest" ? dateB - dateA : dateA - dateB;
   });

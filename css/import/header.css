@@ -31,7 +31,7 @@ nav {
   background-color: var(
     --navigation-color
   ); /* Add background color to the nav menu */
-  /* z-index: 99; /* Ensure it is above other elements */
+  z-index: 100; /* Ensure it is above other elements */
 }
 .nav-menu.active {
   right: 0;
@@ -112,26 +112,4 @@ nav ul li a:hover:after {
 .active .bar:nth-child(3) {
   transform: translateY(-10px) rotate(-45deg);
   width: 300%;
-}
-
-.text-typing {
-  position: relative;
-  margin-left: 10px;
-}
-.text-typing::after {
-  content: "";
-  position: absolute;
-  right: -5px;
-  width: 1px;
-  height: 90%;
-  border-right: 2px solid;
-  animation: blink 0.5s infinite ease;
-}
-@keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
